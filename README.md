@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img alt="Gympoint" title="Gympoint" src=".github/logo.png" width="200px" />
+  <img alt="Gympoint" title="Gympoint" src="./logo.png" width="200px" />
 </h1>
 
 <h3 align="center">
@@ -24,7 +24,6 @@
 
 <p align="center">
   <a href="#rocket-sobre-o-desafio">Sobre o desafio</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-entrega">Entrega</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#memo-licença">Licença</a>
 </p>
 
@@ -50,48 +49,6 @@ Abaixo estão descritas as funcionalidades que você deve adicionar em sua aplic
 
 Permita que um usuário se autentique em sua aplicação utilizando e-mail e uma senha.
 
-Crie um usuário administrador utilizando a funcionalidade de [seeds do sequelize](https://sequelize.org/master/manual/migrations.html#creating-first-seed), essa funcionalidade serve para criarmos registros na base de dados de forma automatizada.
-
-Para criar um seed utilize o comando:
-
-```js
-yarn sequelize seed:generate --name admin-user
-```
-
-No arquivo gerado na pasta `src/database/seeds` adicione o código referente à criação de um usuário administrador:
-
-```js
-const bcrypt = require("bcryptjs");
-
-module.exports = {
-  up: QueryInterface => {
-    return QueryInterface.bulkInsert(
-      "users",
-      [
-        {
-          name: "Administrador",
-          email: "admin@gympoint.com",
-          password_hash: bcrypt.hashSync("123456", 8),
-          created_at: new Date(),
-          updated_at: new Date()
-        }
-      ],
-      {}
-    );
-  },
-
-  down: () => {}
-};
-```
-
-Agora execute:
-
-```js
-yarn sequelize db:seed:all
-```
-
-Agora você tem um usuário na sua base de dados, utilize esse usuário para todos logins daqui pra frente.
-
 - A autenticação deve ser feita utilizando JWT.
 - Realize a validação dos dados de entrada;
 
@@ -105,14 +62,6 @@ O cadastro de alunos só pode ser feito por administradores autenticados na apli
 
 O aluno não pode se autenticar no sistema, ou seja, não possui senha.
 
-## 📅 Entrega
-
-Esse desafio **não precisa ser entregue** e não receberá correção. Além disso, o código fonte **não está disponível** por fazer parte do **desafio final**, que será corrigido para **certificação** do bootcamp. Após concluir o desafio, adicionar esse código ao seu Github é uma boa forma de demonstrar seus conhecimentos para oportunidades futuras.
-
 ## :memo: Licença
 
 Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
-
----
-
-Feito com ♥ by Rocketseat :wave: [Entre na nossa comunidade!](https://discordapp.com/invite/gCRAFhc)
