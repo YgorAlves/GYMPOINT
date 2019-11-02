@@ -1,4 +1,5 @@
 import { parseISO, addMonths } from 'date-fns';
+import * as Yup from 'yup';
 import Registration from '../models/Registration';
 import Plan from '../models/Plan';
 import Student from '../models/Student';
@@ -21,6 +22,16 @@ class RegistrationController {
   }
 
   async store(req, res) {
+    const schema = Yup.object().shape({
+      student_id: Yup.number().required(),
+      plan_id: Yup.number().required(),
+      start_date: Yup.date().required(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(401).json({ error: 'Fields validation invalid.' });
+    }
+
     const { student_id, plan_id, start_date } = req.body;
 
     const plan = await Plan.findByPk(plan_id);
@@ -67,6 +78,16 @@ class RegistrationController {
   }
 
   async update(req, res) {
+    const schema = Yup.object().shape({
+      student_id: Yup.number(),
+      plan_id: Yup.number(),
+      start_date: Yup.date(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(401).json({ error: 'Fields validation invalid.' });
+    }
+
     const { start_date, student_id, plan_id } = req.body;
 
     let student = null;
