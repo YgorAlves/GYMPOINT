@@ -1,5 +1,4 @@
 import Sequelize, { Model } from 'sequelize';
-// import bcrypt from 'bcryptjs';
 
 class Student extends Model {
   static init(sequelize) {
@@ -7,9 +6,9 @@ class Student extends Model {
       {
         name: Sequelize.STRING,
         email: Sequelize.STRING,
-        idade: Sequelize.INTEGER,
-        peso: Sequelize.DOUBLE,
-        altura: Sequelize.DOUBLE,
+        age: Sequelize.INTEGER,
+        weight: Sequelize.DOUBLE,
+        height: Sequelize.DOUBLE,
       },
       {
         sequelize,

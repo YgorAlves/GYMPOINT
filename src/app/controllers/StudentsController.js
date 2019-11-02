@@ -1,57 +1,58 @@
 import * as Yup from 'yup';
+
 import Student from '../models/Student';
 
-class StudentsController {
+class StudentController {
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
       email: Yup.string()
         .email()
         .required(),
-      idade: Yup.number()
+      age: Yup.number()
         .integer()
         .max(100)
         .positive()
         .required(),
-      peso: Yup.number()
+      weight: Yup.number()
         .positive()
         .required(),
-      altura: Yup.number()
+      height: Yup.number()
         .positive()
         .required(),
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' });
+      return res.status(401).json({ error: 'Fields validation invalid.' });
     }
 
     const studentExists = await Student.findOne({
       where: { email: req.body.email },
     });
-
     if (studentExists) {
       return res.status(401).json({
-        error: 'Student already exists',
+        error: 'This e-mail is already in use.',
         data: {
           name: studentExists.name,
           email: studentExists.email,
-          created_at: studentExists.created_at,
+          created_at: studentExists.createdAt,
         },
       });
     }
 
-    const { id, name, email, idade, peso, altura } = await Student.create(
+    const { id, name, email, age, weight, height } = await Student.create(
       req.body
     );
-    return res.json({
+    return res.status(201).json({
+      message: 'Student succesfully created',
       id,
       name,
       email,
-      idade,
-      peso,
-      altura,
+      age,
+      weight,
+      height,
     });
   }
 }
 
-export default new StudentsController();
+export default new StudentController();

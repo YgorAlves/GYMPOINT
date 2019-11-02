@@ -14,7 +14,7 @@ class SessionController {
     });
 
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' });
+      return res.status(401).json({ error: 'Fields validation fails.' });
     }
 
     const { email, password } = req.body;
@@ -32,6 +32,7 @@ class SessionController {
     const { id, name } = user;
 
     return res.json({
+      message: 'User is logged',
       user: {
         id,
         name,
