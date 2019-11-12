@@ -30,6 +30,21 @@ ou
 yarn
 ```
 
+## Tecnologias/Ferramentas utilizadas
+
+```bash
+Docker Desktop
+Sequelize
+Mongoose
+*Autenticação JWT
+Bcrypt: Password HASH
+Multer: Upload de imagens
+NodeMailer: Envio de email com Node.JS
+Handlebars: Templates de EMAIL com HTML e CSS
+BeeQueue: Fila e background jobs com REDIS
+Sentry.io: Tratamento de exceções
+```
+
 ## :memo: Licença
 
 Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
